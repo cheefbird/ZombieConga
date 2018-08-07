@@ -68,6 +68,7 @@ class GameScene: SKScene {
     move(sprite: zombie, velocity: velocity)
     
     boundsCheckZombie()
+    rotate(sprite: zombie, direction: velocity)
   }
   
   // MARK: - Touch Handling
@@ -133,6 +134,10 @@ class GameScene: SKScene {
       zombie.position.y = topRight.y
       velocity.y = -velocity.y
     }
+  }
+  
+  func rotate(sprite: SKSpriteNode, direction: CGPoint) {
+    sprite.zRotation = atan2(direction.y, direction.x)
   }
   
   // MARK: - Debug Methods
