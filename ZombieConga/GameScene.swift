@@ -98,20 +98,20 @@ class GameScene: SKScene {
   // MARK: - Methods
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
-    let amountToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
+    let amountToMove = velocity * CGFloat(dt)
     
     print("Amount to move: \(amountToMove)")
     
-    sprite.position = CGPoint(x: sprite.position.x + amountToMove.x, y: sprite.position.y + amountToMove.y)
+    sprite.position += amountToMove
   }
   
   func moveZombieToward(location: CGPoint) {
-    let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
+    let offset = location - zombie.position
     
-    let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
+    let length = offset.length()
     
-    let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
-    velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+    let direction = offset / CGFloat(length)
+    velocity = direction * zombieMovePointsPerSec
   }
   
   func boundsCheckZombie() {
