@@ -108,9 +108,8 @@ class GameScene: SKScene {
   func moveZombieToward(location: CGPoint) {
     let offset = location - zombie.position
     
-    let length = offset.length()
+    let direction = offset.normalized()
     
-    let direction = offset / CGFloat(length)
     velocity = direction * zombieMovePointsPerSec
   }
   
@@ -137,7 +136,7 @@ class GameScene: SKScene {
   }
   
   func rotate(sprite: SKSpriteNode, direction: CGPoint) {
-    sprite.zRotation = atan2(direction.y, direction.x)
+    sprite.zRotation = direction.angle
   }
   
   // MARK: - Debug Methods
