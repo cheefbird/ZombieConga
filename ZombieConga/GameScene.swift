@@ -22,6 +22,10 @@ class GameScene: SKScene {
   var lastUpdateTime: TimeInterval = 0
   var dt: TimeInterval = 0
   
+  // MARK: - Optional Properties
+  
+  var lastTouchLocation: CGPoint?
+  
   // MARK: - Overrides
   
   override init(size: CGSize) {
@@ -65,15 +69,25 @@ class GameScene: SKScene {
     lastUpdateTime = currentTime
     print("\(dt*1000) ms since last update")
     
-    move(sprite: zombie, velocity: velocity)
+    if let lastTouchLocation = lastTouchLocation {
+      let diff = lastTouchLocation - zombie.position
+      
+      if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
+        zombie.position = lastTouchLocation
+        velocity = CGPoint.zero
+      } else {
+        move(sprite: zombie, velocity: velocity)
+        rotate(sprite: zombie, direction: velocity)
+      }
+    }
     
     boundsCheckZombie()
-    rotate(sprite: zombie, direction: velocity)
   }
   
   // MARK: - Touch Handling
   
   func sceneTouched(touchLocation: CGPoint) {
+    lastTouchLocation = touchLocation
     moveZombieToward(location: touchLocation)
   }
   
