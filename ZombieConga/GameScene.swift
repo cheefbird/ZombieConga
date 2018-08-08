@@ -15,6 +15,7 @@ class GameScene: SKScene {
   let playableRect: CGRect
   
   let zombie: SKSpriteNode = SKSpriteNode(imageNamed: "zombie1")
+  let zombieAnimation: SKAction
   
   let zombieMovePointsPerSec: CGFloat = 480.0
   let zombieRotateRadiansPerSec: CGFloat = 4.0 * π
@@ -36,6 +37,19 @@ class GameScene: SKScene {
     
     playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
     
+    var textures: [SKTexture] = []
+    
+    for i in 1...4 {
+      textures.append(SKTexture(imageNamed: "zombie\(i)"))
+    }
+    
+    textures.append(textures[2])
+    textures.append(textures[1])
+    
+    zombieAnimation = SKAction.animate(
+      with: textures,
+      timePerFrame: 0.1)
+    
     super.init(size: size)
   }
   
@@ -55,6 +69,8 @@ class GameScene: SKScene {
     
     addChild(background)
     addChild(zombie)
+    
+    zombie.run(SKAction.repeatForever(zombieAnimation))
     
     run(SKAction.repeatForever(
       SKAction.sequence([SKAction.run { [weak self] in
