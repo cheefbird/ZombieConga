@@ -56,6 +56,8 @@ class GameScene: SKScene {
     addChild(background)
     addChild(zombie)
     
+    spawnEnemy()
+    
     debugDrawPLayableArea()
   }
   
@@ -111,6 +113,17 @@ class GameScene: SKScene {
   }
   
   // MARK: - Methods
+  
+  func spawnEnemy() {
+    let enemy = SKSpriteNode(imageNamed: "enemy")
+    enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
+    
+    addChild(enemy)
+    
+    let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width / 2, y: enemy.position.y), duration: 2.0)
+    
+    enemy.run(actionMove)
+  }
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
     let amountToMove = velocity * CGFloat(dt)
