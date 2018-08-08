@@ -56,7 +56,10 @@ class GameScene: SKScene {
     addChild(background)
     addChild(zombie)
     
-    spawnEnemy()
+    run(SKAction.repeatForever(
+      SKAction.sequence([SKAction.run { [weak self] in
+        self?.spawnEnemy()
+        }, SKAction.wait(forDuration: 2.0)])))
     
     debugDrawPLayableArea()
   }
@@ -115,40 +118,19 @@ class GameScene: SKScene {
   
   func spawnEnemy() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
-    enemy.position = CGPoint(x: size.width + enemy.size.width / 2, y: size.height / 2)
+    enemy.position = CGPoint(
+      x: size.width + enemy.size.width / 2,
+      y: CGFloat.random(
+        min: playableRect.minY + enemy.size.height / 2,
+        max: playableRect.maxY - enemy.size.height / 2))
     
     addChild(enemy)
     
-    let actionMidMove = SKAction.moveBy(
-      x: -size.width / 2 - enemy.size.width / 2,
-      y: -playableRect.height / 2 + enemy.size.height / 2,
-      duration: 1.0)
+    let actionMove = SKAction.moveTo(
+      x: -enemy.size.width / 2,
+      duration: 2.0)
     
-    let actionMove = SKAction.moveBy(
-      x: -size.width / 2 - enemy.size.width / 2,
-      y: playableRect.height / 2 - enemy.size.height / 2,
-      duration: 1.0)
-    
-    let waitAction = SKAction.wait(forDuration: 0.25)
-    
-    let logMessageAction = SKAction.run {
-      print("Reached bottom!")
-    }
-    
-    let sequence = SKAction.sequence([
-      actionMidMove,
-      logMessageAction,
-      waitAction,
-      actionMove,
-      actionMove.reversed(),
-      logMessageAction,
-      waitAction,
-      actionMidMove.reversed(),
-      ])
-    
-    let repeatAction = SKAction.repeatForever(sequence)
-    
-    enemy.run(repeatAction)
+    enemy.run(actionMove)
   }
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
