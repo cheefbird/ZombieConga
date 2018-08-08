@@ -130,7 +130,9 @@ class GameScene: SKScene {
       x: -enemy.size.width / 2,
       duration: 2.0)
     
-    enemy.run(actionMove)
+    let actionRemove = SKAction.removeFromParent()
+    
+    enemy.run(SKAction.sequence([actionMove, actionRemove]))
   }
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
