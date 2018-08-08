@@ -146,7 +146,9 @@ class GameScene: SKScene {
       actionMidMove.reversed(),
       ])
     
-    enemy.run(sequence)
+    let repeatAction = SKAction.repeatForever(sequence)
+    
+    enemy.run(repeatAction)
   }
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
