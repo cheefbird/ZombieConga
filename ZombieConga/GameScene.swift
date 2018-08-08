@@ -132,7 +132,9 @@ class GameScene: SKScene {
         y: enemy.position.y),
       duration: 1.0)
     
-    let sequence = SKAction.sequence([actionMidMove, actionMove])
+    let waitAction = SKAction.wait(forDuration: 0.25)
+    
+    let sequence = SKAction.sequence([actionMidMove, waitAction, actionMove])
     
     enemy.run(sequence)
   }
