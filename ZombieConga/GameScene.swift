@@ -17,6 +17,7 @@ class GameScene: SKScene {
   let zombie: SKSpriteNode = SKSpriteNode(imageNamed: "zombie1")
   
   let zombieMovePointsPerSec: CGFloat = 480.0
+  let zombieRotateRadiansPerSec: CGFloat = 4.0 * π
   var velocity = CGPoint.zero
   
   var lastUpdateTime: TimeInterval = 0
@@ -77,7 +78,7 @@ class GameScene: SKScene {
         velocity = CGPoint.zero
       } else {
         move(sprite: zombie, velocity: velocity)
-        rotate(sprite: zombie, direction: velocity)
+        rotate(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
       }
     }
     
@@ -149,8 +150,11 @@ class GameScene: SKScene {
     }
   }
   
-  func rotate(sprite: SKSpriteNode, direction: CGPoint) {
-    sprite.zRotation = direction.angle
+  func rotate(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
+    let shortest = shortestAngleBetween(angle1: sprite.zRotation, angle2: velocity.angle)
+    let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+    
+    sprite.zRotation += shortest.sign() * amountToRotate
   }
   
   // MARK: - Debug Methods
