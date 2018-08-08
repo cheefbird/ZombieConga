@@ -119,16 +119,14 @@ class GameScene: SKScene {
     
     addChild(enemy)
     
-    let actionMidMove = SKAction.move(
-      to: CGPoint(
-        x: size.width / 2,
-        y: playableRect.minY + enemy.size.height / 2),
+    let actionMidMove = SKAction.moveBy(
+      x: -size.width / 2 - enemy.size.width / 2,
+      y: -playableRect.height / 2 + enemy.size.height / 2,
       duration: 1.0)
     
-    let actionMove = SKAction.move(
-      to: CGPoint(
-        x: -enemy.size.width / 2,
-        y: enemy.position.y),
+    let actionMove = SKAction.moveBy(
+      x: -size.width / 2 - enemy.size.width / 2,
+      y: playableRect.height / 2 - enemy.size.height / 2,
       duration: 1.0)
     
     let waitAction = SKAction.wait(forDuration: 0.25)
@@ -141,7 +139,11 @@ class GameScene: SKScene {
       actionMidMove,
       logMessageAction,
       waitAction,
-      actionMove
+      actionMove,
+      actionMove.reversed(),
+      logMessageAction,
+      waitAction,
+      actionMidMove.reversed(),
       ])
     
     enemy.run(sequence)
