@@ -70,7 +70,6 @@ class GameScene: SKScene {
     }
     
     lastUpdateTime = currentTime
-    print("\(dt*1000) ms since last update")
     
     if let lastTouchLocation = lastTouchLocation {
       let diff = lastTouchLocation - zombie.position
@@ -134,15 +133,22 @@ class GameScene: SKScene {
     
     let waitAction = SKAction.wait(forDuration: 0.25)
     
-    let sequence = SKAction.sequence([actionMidMove, waitAction, actionMove])
+    let logMessageAction = SKAction.run {
+      print("Reached bottom!")
+    }
+    
+    let sequence = SKAction.sequence([
+      actionMidMove,
+      logMessageAction,
+      waitAction,
+      actionMove
+      ])
     
     enemy.run(sequence)
   }
   
   func move(sprite: SKSpriteNode, velocity: CGPoint) {
     let amountToMove = velocity * CGFloat(dt)
-    
-    print("Amount to move: \(amountToMove)")
     
     sprite.position += amountToMove
   }
