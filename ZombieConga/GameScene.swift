@@ -70,8 +70,6 @@ class GameScene: SKScene {
     addChild(background)
     addChild(zombie)
     
-//    zombie.run(SKAction.repeatForever(zombieAnimation))
-    
     run(SKAction.repeatForever(
       SKAction.sequence([SKAction.run { [weak self] in
         self?.spawnEnemy()
@@ -141,6 +139,9 @@ class GameScene: SKScene {
   
   func spawnCat() {
     let cat = SKSpriteNode(imageNamed: "cat")
+    
+    cat.name = "cat"
+    
     cat.position = CGPoint(
       x: CGFloat.random(min: playableRect.minX,
                         max: playableRect.maxX),
@@ -173,6 +174,9 @@ class GameScene: SKScene {
   
   func spawnEnemy() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
+    
+    enemy.name = "enemy"
+    
     enemy.position = CGPoint(
       x: size.width + enemy.size.width / 2,
       y: CGFloat.random(
