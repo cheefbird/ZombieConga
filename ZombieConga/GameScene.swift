@@ -41,6 +41,18 @@ class GameScene: SKScene {
   
   var lastTouchLocation: CGPoint?
   
+  // MARK: - Computed Properties
+  var cameraRect: CGRect {
+    let x = cameraNode.position.x - size.width / 2 + (size.width - playableRect.width) / 2
+    let y = cameraNode.position.y - size.height / 2 + (size.height - playableRect.height) / 2
+    
+    return CGRect(
+      x: x,
+      y: y,
+      width: playableRect.width,
+      height: playableRect.height)
+  }
+  
   // MARK: - Overrides
   
   override init(size: CGSize) {
@@ -73,12 +85,14 @@ class GameScene: SKScene {
   override func didMove(to view: SKView) {
     backgroundColor = SKColor.black
     
-    let background = backgroundNode()
-    background.anchorPoint = .zero
-    background.position = .zero
-    background.name = "background"
-    background.zPosition = -1
-    addChild(background)
+    for i in 0...1 {
+      let background = backgroundNode()
+      background.anchorPoint = .zero
+      background.position = CGPoint(x: CGFloat(i) * background.size.width, y: 0)
+      background.name = "background"
+      background.zPosition = -1
+      addChild(background)
+    }
     
     zombie.position = CGPoint(x: 400, y: 400)
     zombie.zPosition = 100
@@ -94,7 +108,7 @@ class GameScene: SKScene {
         self?.spawnCat()
         }, SKAction.wait(forDuration: 1.0)])))
     
-//    debugDrawPLayableArea()
+    //    debugDrawPLayableArea()
     
     playBackgroundMusic(filename: "backgroundMusic.mp3")
     
@@ -409,12 +423,12 @@ class GameScene: SKScene {
       node.name = ""
       
       node.run(SKAction.sequence([
-          SKAction.group([
-              SKAction.rotate(byAngle: π * 4, duration: 1.0),
-              SKAction.move(to: randomSpot, duration: 1.0),
-              SKAction.scale(to: 0, duration: 1.0)
-            ]),
-          SKAction.removeFromParent()
+        SKAction.group([
+          SKAction.rotate(byAngle: π * 4, duration: 1.0),
+          SKAction.move(to: randomSpot, duration: 1.0),
+          SKAction.scale(to: 0, duration: 1.0)
+          ]),
+        SKAction.removeFromParent()
         ]))
       
       loseCount += 1
@@ -452,6 +466,16 @@ class GameScene: SKScene {
     let amount = velocity * CGFloat(dt)
     
     cameraNode.position += amount
+    
+    enumerateChildNodes(withName: "background") { node, _ in
+      let background = node as! SKSpriteNode
+      
+      if background.position.x + background.size.width < self.cameraRect.origin.x {
+        background.position = CGPoint(
+          x: background.position.x + background.size.width*2,
+          y: background.position.y)
+      }
+    }
   }
   
   // MARK: - Debug Methods
