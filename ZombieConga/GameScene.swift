@@ -34,6 +34,9 @@ class GameScene: SKScene {
   var lives = 5
   var gameOver = false
   
+  let cameraNode = SKCameraNode()
+  let cameraMovePointsPerSec: CGFloat = 200.0
+  
   // MARK: - Optional Properties
   
   var lastTouchLocation: CGPoint?
@@ -70,9 +73,10 @@ class GameScene: SKScene {
   override func didMove(to view: SKView) {
     backgroundColor = SKColor.black
     
-    let background = SKSpriteNode(imageNamed: "background1")
-    background.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-    background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+    let background = backgroundNode()
+    background.anchorPoint = .zero
+    background.position = .zero
+    background.name = "background"
     background.zPosition = -1
     addChild(background)
     
@@ -93,6 +97,10 @@ class GameScene: SKScene {
 //    debugDrawPLayableArea()
     
     playBackgroundMusic(filename: "backgroundMusic.mp3")
+    
+    addChild(cameraNode)
+    camera = cameraNode
+    cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
   }
   
   override func update(_ currentTime: TimeInterval) {
@@ -122,6 +130,8 @@ class GameScene: SKScene {
     boundsCheckZombie()
     
     moveTrain()
+    
+    moveCamera()
     
     if lives <= 0 && !gameOver {
       gameOver = true
@@ -412,6 +422,36 @@ class GameScene: SKScene {
         stop[0] = true
       }
     }
+  }
+  
+  func backgroundNode() -> SKSpriteNode {
+    
+    let backgroundNode = SKSpriteNode()
+    backgroundNode.anchorPoint = CGPoint.zero
+    backgroundNode.name = "background"
+    
+    let background1 = SKSpriteNode(imageNamed: "background1")
+    background1.anchorPoint = CGPoint.zero
+    background1.position = CGPoint(x: 0, y: 0)
+    backgroundNode.addChild(background1)
+    
+    let background2 = SKSpriteNode(imageNamed: "background2")
+    background2.anchorPoint = CGPoint.zero
+    background2.position = CGPoint(x: background1.size.width, y: 0)
+    backgroundNode.addChild(background2)
+    
+    backgroundNode.size = CGSize(
+      width: background1.size.width + background2.size.width,
+      height: background1.size.height)
+    
+    return backgroundNode
+  }
+  
+  func moveCamera() {
+    let velocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
+    let amount = velocity * CGFloat(dt)
+    
+    cameraNode.position += amount
   }
   
   // MARK: - Debug Methods
