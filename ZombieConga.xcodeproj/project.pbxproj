@@ -18,6 +18,8 @@
 		D50D92312115834C00A9363F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50D922F2115834C00A9363F /* Main.storyboard */; };
 		D50D92332115834F00A9363F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D50D92322115834F00A9363F /* Assets.xcassets */; };
 		D50D92362115834F00A9363F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50D92342115834F00A9363F /* LaunchScreen.storyboard */; };
+		D573661F2164578E00270D16 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D573661E2164578E00270D16 /* GameOverScene.swift */; };
+		D588A78521687E5D005F51FB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588A78421687E5D005F51FB /* MainMenuScene.swift */; };
 		D594FE8321191AEE00246130 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594FE8221191AEE00246130 /* MathUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		D50D92322115834F00A9363F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D50D92352115834F00A9363F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D50D92372115834F00A9363F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D573661E2164578E00270D16 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		D588A78421687E5D005F51FB /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		D594FE8221191AEE00246130 /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +86,9 @@
 			children = (
 				D5019D4821373294002D72AA /* Sounds */,
 				D50D92252115834C00A9363F /* AppDelegate.swift */,
+				D588A78421687E5D005F51FB /* MainMenuScene.swift */,
 				D50D922B2115834C00A9363F /* GameScene.swift */,
+				D573661E2164578E00270D16 /* GameOverScene.swift */,
 				D50D922D2115834C00A9363F /* GameViewController.swift */,
 				D594FE8221191AEE00246130 /* MathUtils.swift */,
 				D50D922F2115834C00A9363F /* Main.storyboard */,
@@ -169,6 +175,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D588A78521687E5D005F51FB /* MainMenuScene.swift in Sources */,
+				D573661F2164578E00270D16 /* GameOverScene.swift in Sources */,
 				D50D922C2115834C00A9363F /* GameScene.swift in Sources */,
 				D594FE8321191AEE00246130 /* MathUtils.swift in Sources */,
 				D50D922E2115834C00A9363F /* GameViewController.swift in Sources */,
