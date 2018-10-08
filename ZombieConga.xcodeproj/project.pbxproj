@@ -20,6 +20,7 @@
 		D50D92362115834F00A9363F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50D92342115834F00A9363F /* LaunchScreen.storyboard */; };
 		D573661F2164578E00270D16 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D573661E2164578E00270D16 /* GameOverScene.swift */; };
 		D588A78521687E5D005F51FB /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D588A78421687E5D005F51FB /* MainMenuScene.swift */; };
+		D58CEB60216B2826003B4058 /* GLIMSTIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D58CEB5F216B2826003B4058 /* GLIMSTIC.TTF */; };
 		D594FE8321191AEE00246130 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594FE8221191AEE00246130 /* MathUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		D50D92372115834F00A9363F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D573661E2164578E00270D16 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		D588A78421687E5D005F51FB /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		D58CEB5F216B2826003B4058 /* GLIMSTIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GLIMSTIC.TTF; sourceTree = "<group>"; };
 		D594FE8221191AEE00246130 /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 		D50D92242115834C00A9363F /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				D58CEB5F216B2826003B4058 /* GLIMSTIC.TTF */,
 				D5019D4821373294002D72AA /* Sounds */,
 				D50D92252115834C00A9363F /* AppDelegate.swift */,
 				D588A78421687E5D005F51FB /* MainMenuScene.swift */,
@@ -157,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58CEB60216B2826003B4058 /* GLIMSTIC.TTF in Resources */,
 				D5019D4F21373294002D72AA /* lose.wav in Resources */,
 				D50D92312115834C00A9363F /* Main.storyboard in Resources */,
 				D5019D5221373294002D72AA /* backgroundMusic.mp3 in Resources */,
